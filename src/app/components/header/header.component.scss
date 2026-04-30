@@ -1,17 +1,18 @@
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--color-white, #fff);
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+  color: var(--color-primary, #1a2b6d);
 
   &__logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    color: var(--color-primary, #1a2b6d);
+    color: inherit;
     cursor: pointer;
   }
 
@@ -24,5 +25,32 @@
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: 2px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--color-primary, #1a2b6d);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.2s;
+
+  &:hover {
+    background-color: var(--color-bg, #f0f2f5);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
