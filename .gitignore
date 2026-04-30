@@ -1,16 +1,15 @@
-# Dependencies
+# Dependencias
 node_modules/
 .pnp.*
 .yarn/
 
-# Build
+# Build output
 dist/
 tmp/
 out-tsc/
 
 # IDE
 .idea/
-.vscode/
 *.swp
 *.swo
 *~
@@ -25,14 +24,18 @@ Thumbs.db
 # Coverage
 coverage/
 
-# Environment files (keep template)
-# src/environments/environment.prod.ts
-
-# Instruction files (not part of the project)
+# Archivos de instrucciones (no forman parte del proyecto)
 instructions.md
 llms.txt
 ejercicio-tecnico-frontend-angular-2024.pdf
 pdf_images/
 
-# Backend (runs separately)
+# Backend (se ejecuta por separado)
 repo-interview-main/
+
+# Vitest
+vitest.config.*.timestamp*
+
+# Misc
+*.log
+npm-debug.log*
