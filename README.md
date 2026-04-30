@@ -1,59 +1,133 @@
-# BancoProductos
+# Ejercicio Técnico Frontend Angular - Banco Productos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
+Aplicación frontend desarrollada para la prueba técnica **Frontend - Angular (2024)**. Permite listar, buscar, crear, editar y eliminar productos financieros consumiendo los servicios locales provistos por el backend del reto.
 
-## Development server
+## Autoría
 
-To start a local development server, run:
+Solución desarrollada por **[Nahuel Lemes](https://github.com/nahulemesF)**.
 
-```bash
-ng serve
-```
+## Tecnologías
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 21
+- TypeScript
+- RxJS
+- SCSS sin frameworks de estilos ni componentes prefabricados
+- Formularios reactivos
+- Signals de Angular
+- Vitest para pruebas unitarias y cobertura
 
-## Code scaffolding
+## Funcionalidades implementadas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **F1 - Listado de productos financieros:** tabla de productos obtenidos desde `/bp/products`.
+- **F2 - Búsqueda:** filtro por texto sobre id, nombre y descripción.
+- **F3 - Cantidad de registros:** contador de resultados y selector de 5, 10 o 20 registros.
+- **F4 - Agregar producto:** formulario de registro con validaciones, reinicio y consumo de creación.
+- **F5 - Editar producto:** opción de edición desde menú contextual, navegación al formulario y campo ID deshabilitado.
+- **F6 - Eliminar producto:** opción de eliminación desde menú contextual con modal de confirmación.
 
-```bash
-ng generate component component-name
-```
+También se incluye manejo visual de errores, estados de carga con skeletons, diseño responsive y rutas lazy-loaded para las pantallas principales.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Validaciones del formulario
 
-```bash
-ng generate --help
-```
+- **ID:** requerido, mínimo 3 caracteres, máximo 10 y verificación de existencia contra `/bp/products/verification/:id`.
+- **Nombre:** requerido, mínimo 5 caracteres y máximo 100.
+- **Descripción:** requerida, mínimo 10 caracteres y máximo 200.
+- **Logo:** requerido.
+- **Fecha de liberación:** requerida y mayor o igual a la fecha actual.
+- **Fecha de revisión:** calculada automáticamente como un año posterior a la fecha de liberación.
 
-## Building
+## Requisitos previos
 
-To build the project run:
+- Node.js y npm instalados.
+- Backend local del reto ejecutándose en `http://localhost:3002`.
 
-```bash
-ng build
-```
+El proyecto incluye `proxy.conf.json` para redirigir las llamadas `/bp` al backend local durante `ng serve`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## Instalación
 
 ```bash
-ng e2e
+npm install
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Ejecución del backend local
 
-## Additional Resources
+Desde la carpeta del backend provista para el reto:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+cd repo-interview-main
+npm install
+npm run start:dev
+```
+
+El servicio debe quedar disponible en:
+
+```text
+http://localhost:3002
+```
+
+## Ejecución del frontend
+
+Desde esta carpeta:
+
+```bash
+npm start
+```
+
+La aplicación queda disponible en:
+
+```text
+http://localhost:4200
+```
+
+## Pruebas unitarias y cobertura
+
+```bash
+npm test -- --watch=false --coverage
+```
+
+Última verificación local:
+
+```text
+Test Files: 9 passed
+Tests: 62 passed
+Statements coverage: 85.88%
+Branches coverage: 89.83%
+Functions coverage: 71.08%
+Lines coverage: 86.20%
+```
+
+La cobertura supera el mínimo requerido del 70%.
+
+## Build de producción
+
+```bash
+npm run build
+```
+
+El artefacto se genera en:
+
+```text
+dist/banco-productos
+```
+
+## Endpoints consumidos
+
+- `GET /bp/products`
+- `GET /bp/products/:id`
+- `POST /bp/products`
+- `PUT /bp/products/:id`
+- `DELETE /bp/products/:id`
+- `GET /bp/products/verification/:id`
+
+## Estructura principal
+
+```text
+src/app/components
+src/app/services
+src/app/models
+src/app/validators
+src/app/utils
+src/app/directives
+```
+
+La solución está organizada por componentes, servicio de productos, validadores reutilizables, utilidades de fecha y una directiva de fallback para logos.
