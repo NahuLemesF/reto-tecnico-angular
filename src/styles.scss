@@ -14,6 +14,24 @@
   --border-radius: 6px;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --skeleton-bg: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
+}
+
+/* === Tema Oscuro === */
+body.dark-mode {
+  --color-primary: #f5d94e;
+  --color-accent: #1a2b6d;
+  --color-accent-hover: #15225c;
+  --color-bg: #121212;
+  --color-white: #1e1e1e;
+  --color-error: #ff6b6b;
+  --color-text: #e0e0e0;
+  --color-text-light: #a0a0a0;
+  --color-border: #333333;
+  --color-border-focus: #555555;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --skeleton-bg: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
 }
 
 /* === Reset === */
