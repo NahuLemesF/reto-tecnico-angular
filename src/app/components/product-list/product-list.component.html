@@ -18,6 +18,7 @@
   <div class="table-wrapper">
     @if (loading()) {
       <!-- Skeleton Loader -->
+  <div class="table-scroll">
       <table class="products-table" aria-label="Cargando productos">
         <thead>
           <tr>
@@ -32,22 +33,24 @@
         <tbody>
           @for (row of skeletonRows; track row) {
             <tr class="skeleton-row">
-              <td><div class="skeleton skeleton-circle"></div></td>
-              <td><div class="skeleton skeleton-text"></div></td>
-              <td><div class="skeleton skeleton-text skeleton-text--wide"></div></td>
-              <td><div class="skeleton skeleton-text skeleton-text--date"></div></td>
-              <td><div class="skeleton skeleton-text skeleton-text--date"></div></td>
-              <td></td>
+              <td data-label="Logo"><div class="skeleton skeleton-circle"></div></td>
+              <td data-label="Nombre del producto"><div class="skeleton skeleton-text"></div></td>
+              <td data-label="Descripción"><div class="skeleton skeleton-text skeleton-text--wide"></div></td>
+              <td data-label="Fecha de liberación"><div class="skeleton skeleton-text skeleton-text--date"></div></td>
+              <td data-label="Fecha de reestructuración"><div class="skeleton skeleton-text skeleton-text--date"></div></td>
+              <td data-label="Acciones"></td>
             </tr>
           }
         </tbody>
       </table>
+    </div>
     } @else if (error()) {
       <div class="error-container">
         <p class="error-message">⚠️ {{ error() }}</p>
         <button class="btn-retry" (click)="loadProducts()">Reintentar</button>
       </div>
     } @else {
+    <div class="table-scroll">
       <table class="products-table" aria-label="Listado de productos financieros">
         <thead>
           <tr>
@@ -77,7 +80,7 @@
         <tbody>
           @for (product of paginatedProducts(); track product.id) {
             <tr>
-              <td class="logo-cell">
+              <td class="logo-cell" data-label="Logo">
                 <div class="logo-container">
                   <img
                     [src]="product.logo"
@@ -87,11 +90,11 @@
                     loading="lazy" />
                 </div>
               </td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
-              <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
-              <td class="actions-cell">
+              <td data-label="Nombre del producto">{{ product.name }}</td>
+              <td data-label="Descripción">{{ product.description }}</td>
+              <td data-label="Fecha de liberación">{{ product.date_release | date:'dd/MM/yyyy' }}</td>
+              <td data-label="Fecha de reestructuración">{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+              <td class="actions-cell" data-label="Acciones">
                 <div class="dropdown-wrapper">
                   <button
                     class="btn-menu"
@@ -128,6 +131,7 @@
           }
         </tbody>
       </table>
+    </div>
     }
   </div>
 
