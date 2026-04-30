@@ -398,12 +398,63 @@
     text-align: center;
   }
 
-  .products-table {
-    font-size: 0.8rem;
+  .table-wrapper {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
 
-    thead th,
-    tbody td {
-      padding: 0.5rem 0.4rem;
+  .products-table {
+    display: block;
+    font-size: 0.9rem;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      width: 100%;
+    }
+
+    tr {
+      display: block;
+      margin-bottom: 1rem;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: var(--color-text-light);
+        text-align: left;
+        margin-right: 1rem;
+      }
+    }
+
+    .logo-cell, .actions-cell {
+      width: 100%;
     }
   }
 }
