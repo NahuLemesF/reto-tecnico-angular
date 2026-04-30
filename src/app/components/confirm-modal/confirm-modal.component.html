@@ -1,0 +1,16 @@
+<div class="modal-overlay" (click)="cancel.emit()" role="dialog" aria-modal="true">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <p class="modal-message">
+      ¿Estás seguro de eliminar el producto {{ productName() }}?
+    </p>
+    <hr class="modal-divider" />
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancel.emit()" id="btn-cancel-delete">
+        Cancelar
+      </button>
+      <button class="btn-confirm" (click)="confirm.emit()" id="btn-confirm-delete">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
