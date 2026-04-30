@@ -1,0 +1,329 @@
+.products-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* === Toolbar === */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  width: 250px;
+  max-width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: var(--color-border-focus);
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+.btn-add {
+  padding: 0.6rem 2rem;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s, transform 0.1s;
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* === Table === */
+.table-wrapper {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    tr {
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    th {
+      padding: 1rem 0.75rem;
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-light);
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.15s;
+
+      &:hover {
+        background-color: #fafafa;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      vertical-align: middle;
+    }
+  }
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 0.6rem;
+  margin-left: 4px;
+  cursor: help;
+  vertical-align: middle;
+}
+
+/* === Logo === */
+.logo-cell {
+  width: 60px;
+}
+
+.product-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e8eaf0;
+}
+
+.logo-fallback {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d0d4e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* === Actions / Dropdown === */
+.actions-cell {
+  width: 50px;
+  text-align: center;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-menu {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--color-text-light);
+  border-radius: 4px;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &--danger {
+    color: var(--color-error);
+
+    &:hover {
+      background-color: #fef2f2;
+    }
+  }
+}
+
+/* === Table Footer === */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0 0.25rem;
+}
+
+.results-count {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.page-size-select {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+  outline: none;
+  background: var(--color-white);
+  cursor: pointer;
+
+  &:focus {
+    border-color: var(--color-border-focus);
+  }
+}
+
+/* === Skeleton Loader === */
+.skeleton {
+  background: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 120px;
+
+  &--wide {
+    width: 180px;
+  }
+
+  &--date {
+    width: 90px;
+  }
+}
+
+.skeleton-row td {
+  padding: 1rem 0.75rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* === Error / Empty === */
+.error-container {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-retry {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .btn-add {
+    width: 100%;
+    text-align: center;
+  }
+
+  .products-table {
+    font-size: 0.8rem;
+
+    thead th,
+    tbody td {
+      padding: 0.5rem 0.4rem;
+    }
+  }
+}
