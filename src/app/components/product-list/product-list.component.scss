@@ -255,16 +255,18 @@
 }
 
 .dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: 100%;
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-md);
-  z-index: 100;
+  z-index: 1000;
   min-width: 120px;
   overflow: hidden;
+}
+
+.dropdown-menu--floating {
+  position: fixed;
+  min-width: 140px;
 }
 
 .dropdown-item {

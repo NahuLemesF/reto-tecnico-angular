@@ -98,27 +98,13 @@
                 <div class="dropdown-wrapper">
                   <button
                     class="btn-menu"
-                    (click)="toggleMenu(product.id)"
+                    (click)="toggleMenu(product.id, $event)"
                     [attr.aria-label]="'Acciones para ' + product.name"
+                    [attr.aria-expanded]="openMenuId() === product.id"
+                    aria-haspopup="menu"
                     id="menu-{{ product.id }}">
                     ⋮
                   </button>
-                  @if (openMenuId() === product.id) {
-                    <div class="dropdown-menu" role="menu">
-                      <button
-                        class="dropdown-item"
-                        (click)="editProduct(product)"
-                        role="menuitem">
-                        Editar
-                      </button>
-                      <button
-                        class="dropdown-item dropdown-item--danger"
-                        (click)="confirmDelete(product)"
-                        role="menuitem">
-                        Eliminar
-                      </button>
-                    </div>
-                  }
                 </div>
               </td>
             </tr>
@@ -152,6 +138,27 @@
     </div>
   }
 </div>
+
+@if (activeMenuProduct(); as product) {
+  <div
+    class="dropdown-menu dropdown-menu--floating"
+    [style.top.px]="menuPosition()?.top"
+    [style.left.px]="menuPosition()?.left"
+    role="menu">
+    <button
+      class="dropdown-item"
+      (click)="editProduct(product)"
+      role="menuitem">
+      Editar
+    </button>
+    <button
+      class="dropdown-item dropdown-item--danger"
+      (click)="confirmDelete(product)"
+      role="menuitem">
+      Eliminar
+    </button>
+  </div>
+}
 
 <!-- Modal de confirmación de eliminación -->
 @if (deleteTarget()) {

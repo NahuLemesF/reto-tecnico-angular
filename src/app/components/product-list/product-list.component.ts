@@ -15,6 +15,11 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
 
 import { ImageFallbackDirective } from '../../directives/image-fallback.directive';
 
+interface DropdownPosition {
+  top: number;
+  left: number;
+}
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -32,6 +37,7 @@ export class ProductListComponent implements OnInit {
   protected readonly pageSize = signal(5);
   protected readonly error = signal<string | null>(null);
   protected readonly openMenuId = signal<string | null>(null);
+  protected readonly menuPosition = signal<DropdownPosition | null>(null);
   protected readonly deleteTarget = signal<Product | null>(null);
 
   protected readonly filteredProducts = computed(() => {
@@ -51,6 +57,10 @@ export class ProductListComponent implements OnInit {
   );
 
   protected readonly resultCount = computed(() => this.filteredProducts().length);
+  protected readonly activeMenuProduct = computed(() => {
+    const id = this.openMenuId();
+    return id ? (this.products().find((product) => product.id === id) ?? null) : null;
+  });
 
   protected readonly skeletonRows = [1, 2, 3, 4, 5];
 
@@ -88,16 +98,42 @@ export class ProductListComponent implements OnInit {
   }
 
   editProduct(product: Product): void {
-    this.openMenuId.set(null);
+    this.closeMenu();
     this.router.navigate(['/products/edit', product.id]);
   }
 
-  toggleMenu(productId: string): void {
-    this.openMenuId.set(this.openMenuId() === productId ? null : productId);
+  toggleMenu(productId: string, event?: MouseEvent): void {
+    if (this.openMenuId() === productId) {
+      this.closeMenu();
+      return;
+    }
+
+    this.openMenuId.set(productId);
+
+    if (!event) {
+      this.menuPosition.set(null);
+      return;
+    }
+
+    const button = event.currentTarget as HTMLElement;
+    const rect = button.getBoundingClientRect();
+    const menuWidth = 140;
+    const menuHeight = 92;
+    const viewportPadding = 12;
+    const top = Math.max(
+      viewportPadding,
+      Math.min(rect.bottom + 8, window.innerHeight - menuHeight - viewportPadding)
+    );
+    const left = Math.min(
+      Math.max(rect.right - menuWidth, viewportPadding),
+      window.innerWidth - menuWidth - viewportPadding
+    );
+
+    this.menuPosition.set({ top, left });
   }
 
   confirmDelete(product: Product): void {
-    this.openMenuId.set(null);
+    this.closeMenu();
     this.deleteTarget.set(product);
   }
 
@@ -123,11 +159,22 @@ export class ProductListComponent implements OnInit {
     this.deleteTarget.set(null);
   }
 
+  closeMenu(): void {
+    this.openMenuId.set(null);
+    this.menuPosition.set(null);
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown-wrapper')) {
-      this.openMenuId.set(null);
+    if (!target.closest('.dropdown-wrapper, .dropdown-menu')) {
+      this.closeMenu();
     }
+  }
+
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  onViewportChange(): void {
+    this.closeMenu();
   }
 }
