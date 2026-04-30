@@ -89,7 +89,8 @@
               "buildTarget": "banco-productos:build:production"
             },
             "development": {
-              "buildTarget": "banco-productos:build:development"
+              "buildTarget": "banco-productos:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

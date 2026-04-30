@@ -1,0 +1,146 @@
+<div class="form-container">
+  <div class="form-header">
+    <button class="btn-back" (click)="goBack()" aria-label="Volver atrás">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </button>
+    <h2 class="form-title">{{ title() }}</h2>
+  </div>
+  
+  <hr class="divider" />
+
+  @if (error()) {
+    <div class="error-banner">
+      ⚠️ {{ error() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="product-form">
+    <div class="form-grid">
+      <!-- ID -->
+      <div class="form-field">
+        <label for="id">ID</label>
+        <input 
+          id="id" 
+          formControlName="id" 
+          [class.invalid]="form.controls.id.invalid && form.controls.id.touched"
+          [attr.aria-invalid]="form.controls.id.invalid && form.controls.id.touched"
+        />
+        @if (form.controls.id.invalid && form.controls.id.touched) {
+          <span class="error-message">
+            @if (form.controls.id.errors?.['required']) { ¡ID no válido! }
+            @else if (form.controls.id.errors?.['minlength']) { Mínimo 3 caracteres }
+            @else if (form.controls.id.errors?.['maxlength']) { Máximo 10 caracteres }
+            @else if (form.controls.id.errors?.['idExists']) { ¡ID no válido! Ya existe. }
+          </span>
+        }
+        @if (form.controls.id.pending) {
+          <span class="info-message">Verificando disponibilidad...</span>
+        }
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-field">
+        <label for="name">Nombre</label>
+        <input 
+          id="name" 
+          formControlName="name" 
+          [class.invalid]="form.controls.name.invalid && form.controls.name.touched"
+          [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
+        />
+        @if (form.controls.name.invalid && form.controls.name.touched) {
+          <span class="error-message">
+            @if (form.controls.name.errors?.['required']) { ¡Este campo es requerido! }
+            @else if (form.controls.name.errors?.['minlength']) { Mínimo 5 caracteres }
+            @else if (form.controls.name.errors?.['maxlength']) { Máximo 100 caracteres }
+          </span>
+        }
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-field">
+        <label for="description">Descripción</label>
+        <input 
+          id="description" 
+          formControlName="description" 
+          [class.invalid]="form.controls.description.invalid && form.controls.description.touched"
+          [attr.aria-invalid]="form.controls.description.invalid && form.controls.description.touched"
+        />
+        @if (form.controls.description.invalid && form.controls.description.touched) {
+          <span class="error-message">
+            @if (form.controls.description.errors?.['required']) { ¡Este campo es requerido! }
+            @else if (form.controls.description.errors?.['minlength']) { Mínimo 10 caracteres }
+            @else if (form.controls.description.errors?.['maxlength']) { Máximo 200 caracteres }
+          </span>
+        }
+      </div>
+
+      <!-- Logo -->
+      <div class="form-field">
+        <label for="logo">Logo</label>
+        <input 
+          id="logo" 
+          formControlName="logo" 
+          [class.invalid]="form.controls.logo.invalid && form.controls.logo.touched"
+          [attr.aria-invalid]="form.controls.logo.invalid && form.controls.logo.touched"
+        />
+        @if (form.controls.logo.invalid && form.controls.logo.touched) {
+          <span class="error-message">
+            @if (form.controls.logo.errors?.['required']) { ¡Este campo es requerido! }
+          </span>
+        }
+      </div>
+
+      <!-- Fecha de Liberación -->
+      <div class="form-field">
+        <label for="date_release">Fecha Liberación</label>
+        <input 
+          type="date"
+          id="date_release" 
+          formControlName="date_release" 
+          [class.invalid]="form.controls.date_release.invalid && form.controls.date_release.touched"
+          [attr.aria-invalid]="form.controls.date_release.invalid && form.controls.date_release.touched"
+        />
+        @if (form.controls.date_release.invalid && form.controls.date_release.touched) {
+          <span class="error-message">
+            @if (form.controls.date_release.errors?.['required']) { ¡Este campo es requerido! }
+            @else if (form.controls.date_release.errors?.['dateReleaseInvalid']) { La fecha debe ser mayor o igual a hoy }
+          </span>
+        }
+      </div>
+
+      <!-- Fecha de Revisión -->
+      <div class="form-field">
+        <label for="date_revision">Fecha Revisión</label>
+        <input 
+          type="date"
+          id="date_revision" 
+          formControlName="date_revision" 
+        />
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        class="btn-reset" 
+        (click)="onReset()" 
+        [disabled]="loading()">
+        Reiniciar
+      </button>
+      <button 
+        type="submit" 
+        class="btn-submit" 
+        [disabled]="form.invalid || form.pending || loading()">
+        @if (loading()) {
+          Procesando...
+        } @else {
+          Enviar
+        }
+      </button>
+    </div>
+  </form>
+</div>
