@@ -1,14 +1,11 @@
-/* === Variables de diseño === */
 :root {
   --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-  
-  /* Light Theme */
-  --color-primary: #0f172a; /* Slate 900 */
-  --color-accent: #f5d94e; /* Vibrant Yellow */
+  --color-primary: #0f172a;
+  --color-accent: #f5d94e;
   --color-accent-hover: #eab308;
-  --color-bg: #f8fafc; /* Slate 50 */
+  --color-bg: #f8fafc;
   --color-white: #ffffff;
-  --color-error: #ef4444; /* Modern red */
+  --color-error: #ef4444;
   --color-text: #1e293b;
   --color-text-light: #64748b;
   --color-border: #e2e8f0;
@@ -21,46 +18,37 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* === Tema Oscuro === */
 body.dark-mode {
-  // Base
   --color-bg: #080F1F;
   --color-surface: #101A2E;
   --color-surface-elevated: #17233A;
   --color-surface-muted: #1E2B44;
-  --color-white: #101A2E; /* Maps to surface */
+  --color-white: #101A2E;
 
-  // Borders / dividers
   --color-border: #2C3A56;
   --color-border-focus: #3A4B6D;
 
-  // Text
   --color-text: #F4F7FB;
   --color-text-light: #B8C4D8;
   --color-text-muted: #8190AA;
 
-  // Brand
   --color-primary: #8FB3FF;
   --color-primary-strong: #5B8DFF;
   --color-primary-dark: #243B73;
 
-  // Action / CTA
   --color-accent: #FFD84D;
   --color-accent-hover: #FFE47A;
   --color-accent-text: #101828;
 
-  // States
   --color-success: #4ADE80;
   --color-warning: #FBBF24;
   --color-error: #FB7185;
 
-  // Shadows
   --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.35);
   --skeleton-bg: linear-gradient(90deg, #101A2E 25%, #17233A 50%, #101A2E 75%);
 }
 
-/* === Reset === */
 *,
 *::before,
 *::after {

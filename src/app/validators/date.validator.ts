@@ -6,7 +6,6 @@ export function dateReleaseValidator(): ValidatorFn {
       return null;
     }
 
-    // Convert input to Date (assuming format YYYY-MM-DD)
     const [year, month, day] = control.value.split('-').map(Number);
     const inputDate = new Date(year, month - 1, day);
     inputDate.setHours(0, 0, 0, 0);

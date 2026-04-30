@@ -16,6 +16,7 @@ import { ProductService } from '../../services/product.service';
 import { dateReleaseValidator } from '../../validators/date.validator';
 import { idExistsValidator } from '../../validators/id-exists.validator';
 import { Product } from '../../models/product.interface';
+import { calculateRevisionDate } from '../../utils/date.utils';
 
 @Component({
   selector: 'app-product-form',
@@ -70,31 +71,24 @@ export class ProductFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // Escuchar cambios en date_release para autocalcular date_revision
+    this.setupFormReactivity();
+    this.checkEditMode();
+  }
+
+  private setupFormReactivity(): void {
     this.form.controls.date_release.valueChanges.subscribe((value) => {
       if (!value) {
         this.form.controls.date_revision.setValue('');
         return;
       }
-
-      const [year, month, day] = value.split('-').map(Number);
-      const releaseDate = new Date(year, month - 1, day);
-      
-      // Sumar exactamente 1 año
-      releaseDate.setFullYear(releaseDate.getFullYear() + 1);
-      
-      const nextYear = releaseDate.getFullYear();
-      const nextMonth = String(releaseDate.getMonth() + 1).padStart(2, '0');
-      const nextDay = String(releaseDate.getDate()).padStart(2, '0');
-      
-      this.form.controls.date_revision.setValue(`${nextYear}-${nextMonth}-${nextDay}`);
+      this.form.controls.date_revision.setValue(calculateRevisionDate(value));
     });
+  }
 
-    // Detectar si es modo edición
+  private checkEditMode(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode.set(true);
-      // En modo edición el ID no se puede cambiar ni re-verificar
       this.form.controls.id.disable();
       this.form.controls.id.clearAsyncValidators();
       this.loadProduct(id);
@@ -105,8 +99,6 @@ export class ProductFormComponent implements OnInit {
     this.loading.set(true);
     this.productService.getOne(id).subscribe({
       next: (product) => {
-        // En un caso real formatearíamos la fecha si viene distinto,
-        // pero según el DTO viene como string "YYYY-MM-DD"
         this.form.patchValue({
           id: product.id,
           name: product.name,
@@ -125,7 +117,6 @@ export class ProductFormComponent implements OnInit {
 
   onReset(): void {
     if (this.isEditMode()) {
-      // En modo edición solo queremos resetear los campos a su estado cargado original
       const id = this.route.snapshot.paramMap.get('id');
       if (id) this.loadProduct(id);
     } else {
@@ -146,7 +137,6 @@ export class ProductFormComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    // Get raw value to include disabled fields (date_revision, and id if editing)
     const productData = this.form.getRawValue() as Product;
 
     const request = this.isEditMode()
