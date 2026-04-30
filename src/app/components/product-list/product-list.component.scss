@@ -79,8 +79,14 @@
   border: 1px solid var(--color-border);
 }
 
+.table-scroll {
+  overflow-x: auto;
+  border-radius: var(--border-radius);
+}
+
 .products-table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
 
   thead {
@@ -402,6 +408,10 @@
     background: transparent;
     border: none;
     box-shadow: none;
+  }
+
+  .table-scroll {
+    overflow: visible;
   }
 
   .products-table {

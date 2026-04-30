@@ -18,6 +18,7 @@
   <div class="table-wrapper">
     @if (loading()) {
       <!-- Skeleton Loader -->
+  <div class="table-scroll">
       <table class="products-table" aria-label="Cargando productos">
         <thead>
           <tr>
@@ -42,12 +43,14 @@
           }
         </tbody>
       </table>
+    </div>
     } @else if (error()) {
       <div class="error-container">
         <p class="error-message">⚠️ {{ error() }}</p>
         <button class="btn-retry" (click)="loadProducts()">Reintentar</button>
       </div>
     } @else {
+    <div class="table-scroll">
       <table class="products-table" aria-label="Listado de productos financieros">
         <thead>
           <tr>
@@ -128,6 +131,7 @@
           }
         </tbody>
       </table>
+    </div>
     }
   </div>
 
