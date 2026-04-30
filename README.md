@@ -27,6 +27,15 @@ Solución desarrollada por **[Nahuel Lemes](https://github.com/nahulemesF)**.
 
 También se incluye manejo visual de errores, estados de carga con skeletons, diseño responsive y rutas lazy-loaded para las pantallas principales.
 
+## Mejoras de experiencia visual
+
+Además de las funcionalidades solicitadas en el enunciado, se incorporaron mejoras orientadas a una experiencia más cómoda y cuidada:
+
+- **Dark Mode:** selector de tema claro/oscuro con persistencia en `localStorage` y adaptación automática inicial según la preferencia del sistema.
+- **Visualización responsive en tarjetas:** en pantallas pequeñas, la tabla se transforma en una lectura tipo tarjeta para mejorar la legibilidad y facilitar la navegación desde dispositivos móviles.
+- **Animaciones e interacciones:** transiciones suaves en la entrada de pantallas, botones, menú contextual, skeleton loader y modal de confirmación para que la interfaz se perciba más fluida.
+- **Tratamiento visual de logos:** se agregó un fallback cuando la imagen de un producto no puede cargarse, manteniendo la consistencia visual del listado.
+
 ## Validaciones del formulario
 
 - **ID:** requerido, mínimo 3 caracteres, máximo 10 y verificación de existencia contra `/bp/products/verification/:id`.
