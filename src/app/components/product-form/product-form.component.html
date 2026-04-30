@@ -30,7 +30,7 @@
         />
         @if (form.controls.id.invalid && form.controls.id.touched) {
           <span class="error-message">
-            @if (form.controls.id.errors?.['required']) { ¡Este campo es requerido! }
+            @if (form.controls.id.errors?.['required']) { ¡ID no válido! }
             @else if (form.controls.id.errors?.['minlength']) { Mínimo 3 caracteres }
             @else if (form.controls.id.errors?.['maxlength']) { Máximo 10 caracteres }
             @else if (form.controls.id.errors?.['idExists']) { ¡ID no válido! Ya existe. }
