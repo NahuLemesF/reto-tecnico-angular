@@ -13,7 +13,7 @@ describe('ProductService', () => {
   let service: ProductService;
   let httpTesting: HttpTestingController;
 
-  const baseUrl = 'http://localhost:3002/bp/products';
+  const baseUrl = '/bp/products';
 
   const mockProduct: Product = {
     id: 'trj-crd',
