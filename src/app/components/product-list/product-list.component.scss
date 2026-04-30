@@ -1,6 +1,19 @@
 .products-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
+  animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* === Toolbar === */
@@ -14,40 +27,48 @@
 }
 
 .search-input {
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  font-size: 0.9rem;
-  width: 250px;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  font-size: 0.95rem;
+  width: 300px;
   max-width: 100%;
   outline: none;
-  transition: border-color 0.2s;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: var(--transition);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 
   &:focus {
     border-color: var(--color-border-focus);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
   }
 
   &::placeholder {
-    color: #aaa;
+    color: var(--color-text-light);
   }
 }
 
 .btn-add {
-  padding: 0.6rem 2rem;
-  background-color: var(--color-accent);
-  color: var(--color-primary);
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  color: var(--color-accent-text, #0f172a);
   border: none;
-  border-radius: var(--border-radius);
-  font-weight: 600;
+  border-radius: var(--border-radius-lg);
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: background-color 0.2s, transform 0.1s;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 
   &:hover {
-    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.97) translateY(0);
   }
 }
 
@@ -55,8 +76,9 @@
 .table-wrapper {
   background: var(--color-white);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
-  overflow-x: auto;
+  box-shadow: var(--shadow-md);
+  overflow: visible; /* Prevent clipping */
+  border: 1px solid var(--color-border);
 }
 
 .products-table {
@@ -64,15 +86,19 @@
   border-collapse: collapse;
 
   thead {
+    background-color: var(--color-bg);
+    
     tr {
       border-bottom: 2px solid var(--color-border);
     }
 
     th {
-      padding: 1rem 0.75rem;
+      padding: 1.2rem 1rem;
       text-align: left;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       color: var(--color-text-light);
       white-space: nowrap;
     }
@@ -80,11 +106,11 @@
 
   tbody {
     tr {
-      border-bottom: 1px solid #f0f0f0;
-      transition: background-color 0.15s;
+      border-bottom: 1px solid var(--color-border);
+      transition: var(--transition);
 
       &:hover {
-        background-color: #fafafa;
+        background-color: var(--color-bg);
       }
 
       &:last-child {
@@ -93,51 +119,112 @@
     }
 
     td {
-      padding: 0.75rem;
-      font-size: 0.9rem;
+      padding: 1rem;
+      font-size: 0.95rem;
       color: var(--color-text);
       vertical-align: middle;
+      font-weight: 500;
     }
   }
 }
 
 .info-icon {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  color: white;
-  font-size: 0.6rem;
-  margin-left: 4px;
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-light);
+  margin-left: 6px;
   cursor: help;
   vertical-align: middle;
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--color-primary);
+
+    &::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      z-index: 1000;
+      pointer-events: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--color-border);
+      z-index: 1000;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* === Logo === */
 .logo-cell {
-  width: 60px;
+  width: 70px;
 }
 
-.product-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #e8eaf0;
-}
-
-.logo-fallback {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #d0d4e0;
+.logo-container {
+  width: 56px;
+  height: 36px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+}
+
+.product-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.2); /* Zooms in to crop out the white border from the JPG */
+}
+
+.logo-fallback {
+  width: 56px;
+  height: 36px;
+  border-radius: 4px;
+  background-color: var(--color-bg);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow: hidden;
 }
 
 /* === Actions / Dropdown === */
@@ -161,7 +248,7 @@
   transition: background-color 0.15s;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-surface-muted, #f0f0f0);
   }
 }
 
@@ -190,14 +277,14 @@
   transition: background-color 0.15s;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: var(--color-surface-muted, #f5f5f5);
   }
 
   &--danger {
     color: var(--color-error);
 
     &:hover {
-      background-color: #fef2f2;
+      background-color: var(--color-surface-muted, #fef2f2);
     }
   }
 }
@@ -222,7 +309,8 @@
   border-radius: var(--border-radius);
   font-size: 0.85rem;
   outline: none;
-  background: var(--color-white);
+  background: var(--color-bg);
+  color: var(--color-text);
   cursor: pointer;
 
   &:focus {

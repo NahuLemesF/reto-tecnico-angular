@@ -55,15 +55,21 @@
             <th>Nombre del producto</th>
             <th>
               Descripción
-              <span class="info-icon" title="Descripción del producto financiero">ⓘ</span>
+              <span class="info-icon" data-tooltip="Descripción del producto financiero">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </span>
             </th>
             <th>
               Fecha de liberación
-              <span class="info-icon" title="Fecha de lanzamiento al público">ⓘ</span>
+              <span class="info-icon" data-tooltip="Fecha de lanzamiento al público">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </span>
             </th>
             <th>
               Fecha de reestructuración
-              <span class="info-icon" title="Fecha de revisión de términos">ⓘ</span>
+              <span class="info-icon" data-tooltip="Fecha de revisión de términos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </span>
             </th>
             <th></th>
           </tr>
@@ -72,12 +78,14 @@
           @for (product of paginatedProducts(); track product.id) {
             <tr>
               <td class="logo-cell">
-                <img
-                  [src]="product.logo"
-                  [alt]="product.name"
-                  class="product-logo"
-                  (error)="onImageError($event)"
-                  loading="lazy" />
+                <div class="logo-container">
+                  <img
+                    [src]="product.logo"
+                    [alt]="product.name"
+                    class="product-logo"
+                    (error)="onImageError($event)"
+                    loading="lazy" />
+                </div>
               </td>
               <td>{{ product.name }}</td>
               <td>{{ product.description }}</td>

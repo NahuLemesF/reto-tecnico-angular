@@ -5,6 +5,7 @@ import {
   inject,
   OnInit,
   signal,
+  HostListener,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -131,6 +132,15 @@ export class ProductListComponent implements OnInit {
       fallback.className = 'logo-fallback';
       fallback.textContent = '📦';
       parent.appendChild(fallback);
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    // Si el clic no fue dentro de un dropdown-wrapper, cerramos el menú abierto
+    if (!target.closest('.dropdown-wrapper')) {
+      this.openMenuId.set(null);
     }
   }
 }
