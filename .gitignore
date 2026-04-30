@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnp.*
+.yarn/
+
+# Build
+dist/
+tmp/
+out-tsc/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Angular cache
+.angular/
+
+# Coverage
+coverage/
+
+# Environment files (keep template)
+# src/environments/environment.prod.ts
+
+# Instruction files (not part of the project)
+instructions.md
+llms.txt
+ejercicio-tecnico-frontend-angular-2024.pdf
+pdf_images/
+
+# Backend (runs separately)
+repo-interview-main/
