@@ -83,7 +83,7 @@
                     [src]="product.logo"
                     [alt]="product.name"
                     class="product-logo"
-                    (error)="onImageError($event)"
+                    appImageFallback
                     loading="lazy" />
                 </div>
               </td>

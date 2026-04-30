@@ -13,18 +13,19 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.interface';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
+import { ImageFallbackDirective } from '../../directives/image-fallback.directive';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, ConfirmModalComponent],
+  imports: [DatePipe, ConfirmModalComponent, ImageFallbackDirective],
 })
 export class ProductListComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly router = inject(Router);
 
-  // Estado reactivo con signals
   protected readonly products = signal<Product[]>([]);
   protected readonly loading = signal(true);
   protected readonly searchTerm = signal('');
@@ -33,7 +34,6 @@ export class ProductListComponent implements OnInit {
   protected readonly openMenuId = signal<string | null>(null);
   protected readonly deleteTarget = signal<Product | null>(null);
 
-  // Estado derivado con computed()
   protected readonly filteredProducts = computed(() => {
     const term = this.searchTerm().toLowerCase().trim();
     const all = this.products();
@@ -123,22 +123,9 @@ export class ProductListComponent implements OnInit {
     this.deleteTarget.set(null);
   }
 
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    img.style.display = 'none';
-    const parent = img.parentElement;
-    if (parent) {
-      const fallback = document.createElement('div');
-      fallback.className = 'logo-fallback';
-      fallback.textContent = '📦';
-      parent.appendChild(fallback);
-    }
-  }
-
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    // Si el clic no fue dentro de un dropdown-wrapper, cerramos el menú abierto
     if (!target.closest('.dropdown-wrapper')) {
       this.openMenuId.set(null);
     }

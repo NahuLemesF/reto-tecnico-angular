@@ -16,7 +16,6 @@
   }
 }
 
-/* === Toolbar === */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -72,12 +71,11 @@
   }
 }
 
-/* === Table === */
 .table-wrapper {
   background: var(--color-white);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-md);
-  overflow: visible; /* Prevent clipping */
+  overflow: visible;
   border: 1px solid var(--color-border);
 }
 
@@ -189,7 +187,6 @@
   }
 }
 
-/* === Logo === */
 .logo-cell {
   width: 70px;
 }
@@ -209,7 +206,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.2); /* Zooms in to crop out the white border from the JPG */
+  transform: scale(1.2);
 }
 
 .logo-fallback {
@@ -227,7 +224,6 @@
   overflow: hidden;
 }
 
-/* === Actions / Dropdown === */
 .actions-cell {
   width: 50px;
   text-align: center;
@@ -289,7 +285,6 @@
   }
 }
 
-/* === Table Footer === */
 .table-footer {
   display: flex;
   justify-content: space-between;
@@ -318,7 +313,6 @@
   }
 }
 
-/* === Skeleton Loader === */
 .skeleton {
   background: var(--skeleton-bg, linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%));
   background-size: 200% 100%;
@@ -358,7 +352,6 @@
   }
 }
 
-/* === Error / Empty === */
 .error-container {
   text-align: center;
   padding: 3rem 1rem;
@@ -390,7 +383,6 @@
   font-style: italic;
 }
 
-/* === Responsive === */
 @media (max-width: 768px) {
   .toolbar {
     flex-direction: column;
