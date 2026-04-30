@@ -1,0 +1,150 @@
+<div class="products-container">
+  <!-- Toolbar: Search + Add Button -->
+  <div class="toolbar">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      [value]="searchTerm()"
+      (input)="onSearch($event)"
+      id="search-input"
+      aria-label="Buscar productos" />
+    <button class="btn-add" (click)="navigateToAdd()" id="btn-add">
+      Agregar
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    @if (loading()) {
+      <!-- Skeleton Loader -->
+      <table class="products-table" aria-label="Cargando productos">
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre del producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of skeletonRows; track row) {
+            <tr class="skeleton-row">
+              <td><div class="skeleton skeleton-circle"></div></td>
+              <td><div class="skeleton skeleton-text"></div></td>
+              <td><div class="skeleton skeleton-text skeleton-text--wide"></div></td>
+              <td><div class="skeleton skeleton-text skeleton-text--date"></div></td>
+              <td><div class="skeleton skeleton-text skeleton-text--date"></div></td>
+              <td></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else if (error()) {
+      <div class="error-container">
+        <p class="error-message">⚠️ {{ error() }}</p>
+        <button class="btn-retry" (click)="loadProducts()">Reintentar</button>
+      </div>
+    } @else {
+      <table class="products-table" aria-label="Listado de productos financieros">
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre del producto</th>
+            <th>
+              Descripción
+              <span class="info-icon" title="Descripción del producto financiero">ⓘ</span>
+            </th>
+            <th>
+              Fecha de liberación
+              <span class="info-icon" title="Fecha de lanzamiento al público">ⓘ</span>
+            </th>
+            <th>
+              Fecha de reestructuración
+              <span class="info-icon" title="Fecha de revisión de términos">ⓘ</span>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of paginatedProducts(); track product.id) {
+            <tr>
+              <td class="logo-cell">
+                <img
+                  [src]="product.logo"
+                  [alt]="product.name"
+                  class="product-logo"
+                  (error)="onImageError($event)"
+                  loading="lazy" />
+              </td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
+              <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+              <td class="actions-cell">
+                <div class="dropdown-wrapper">
+                  <button
+                    class="btn-menu"
+                    (click)="toggleMenu(product.id)"
+                    [attr.aria-label]="'Acciones para ' + product.name"
+                    id="menu-{{ product.id }}">
+                    ⋮
+                  </button>
+                  @if (openMenuId() === product.id) {
+                    <div class="dropdown-menu" role="menu">
+                      <button
+                        class="dropdown-item"
+                        (click)="editProduct(product)"
+                        role="menuitem">
+                        Editar
+                      </button>
+                      <button
+                        class="dropdown-item dropdown-item--danger"
+                        (click)="confirmDelete(product)"
+                        role="menuitem">
+                        Eliminar
+                      </button>
+                    </div>
+                  }
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-message">
+                No se encontraron productos
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+
+  <!-- Footer: Results count + Page size selector -->
+  @if (!loading()) {
+    <div class="table-footer">
+      <span class="results-count">{{ resultCount() }} Resultados</span>
+      <select
+        class="page-size-select"
+        [value]="pageSize()"
+        (change)="onPageSizeChange($event)"
+        id="page-size-select"
+        aria-label="Cantidad de resultados por página">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  }
+</div>
+
+<!-- Modal de confirmación de eliminación -->
+@if (deleteTarget()) {
+  <app-confirm-modal
+    [productName]="deleteTarget()!.name"
+    (confirm)="onDeleteConfirm()"
+    (cancel)="onDeleteCancel()" />
+}
