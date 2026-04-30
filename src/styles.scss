@@ -1,37 +1,63 @@
 /* === Variables de diseño === */
 :root {
-  --color-primary: #1a2b6d;
-  --color-accent: #f5d94e;
-  --color-accent-hover: #e5c64c;
-  --color-bg: #f0f2f5;
+  --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  
+  /* Light Theme */
+  --color-primary: #0f172a; /* Slate 900 */
+  --color-accent: #f5d94e; /* Vibrant Yellow */
+  --color-accent-hover: #eab308;
+  --color-bg: #f8fafc; /* Slate 50 */
   --color-white: #ffffff;
-  --color-error: #dc3545;
-  --color-text: #333333;
-  --color-text-light: #666666;
-  --color-border: #e0e0e0;
-  --color-border-focus: #a0a0a0;
-  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --border-radius: 6px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --skeleton-bg: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
+  --color-error: #ef4444; /* Modern red */
+  --color-text: #1e293b;
+  --color-text-light: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-focus: #3b82f6;
+
+  --border-radius: 12px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --skeleton-bg: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* === Tema Oscuro === */
 body.dark-mode {
-  --color-primary: #f5d94e;
-  --color-accent: #1a2b6d;
-  --color-accent-hover: #15225c;
-  --color-bg: #121212;
-  --color-white: #1e1e1e;
-  --color-error: #ff6b6b;
-  --color-text: #e0e0e0;
-  --color-text-light: #a0a0a0;
-  --color-border: #333333;
-  --color-border-focus: #555555;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --skeleton-bg: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  // Base
+  --color-bg: #080F1F;
+  --color-surface: #101A2E;
+  --color-surface-elevated: #17233A;
+  --color-surface-muted: #1E2B44;
+  --color-white: #101A2E; /* Maps to surface */
+
+  // Borders / dividers
+  --color-border: #2C3A56;
+  --color-border-focus: #3A4B6D;
+
+  // Text
+  --color-text: #F4F7FB;
+  --color-text-light: #B8C4D8;
+  --color-text-muted: #8190AA;
+
+  // Brand
+  --color-primary: #8FB3FF;
+  --color-primary-strong: #5B8DFF;
+  --color-primary-dark: #243B73;
+
+  // Action / CTA
+  --color-accent: #FFD84D;
+  --color-accent-hover: #FFE47A;
+  --color-accent-text: #101828;
+
+  // States
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-error: #FB7185;
+
+  // Shadows
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.35);
+  --skeleton-bg: linear-gradient(90deg, #101A2E 25%, #17233A 50%, #101A2E 75%);
 }
 
 /* === Reset === */
@@ -54,6 +80,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
