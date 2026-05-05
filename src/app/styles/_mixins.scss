@@ -1,0 +1,66 @@
+@mixin respond-to($max-width: 1024px) {
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin card-surface($shadow: var(--shadow-sm)) {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: $shadow;
+}
+
+@mixin button-base($padding: 0.75rem 1.5rem, $radius: var(--border-radius)) {
+  padding: $padding;
+  border: none;
+  border-radius: $radius;
+  font-weight: 600;
+  transition: var(--transition);
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+@mixin button-accent($padding: 0.75rem 1.5rem, $radius: var(--border-radius)) {
+  @include button-base($padding, $radius);
+  background-color: var(--color-accent);
+  color: var(--color-accent-text, #0f172a);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-accent-hover);
+  }
+}
+
+@mixin button-secondary($padding: 0.75rem 1.5rem, $radius: var(--border-radius)) {
+  @include button-base($padding, $radius);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-border);
+  }
+}
+
+@mixin focus-ring($color: rgba(59, 130, 246, 0.1)) {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 4px $color;
+}
+
+@mixin slide-up-fade($duration: 0.6s) {
+  animation: slideUpFade $duration cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@mixin shimmer-skeleton {
+  background: var(--skeleton-bg);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}

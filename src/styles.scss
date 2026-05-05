@@ -4,7 +4,11 @@
   --color-accent: #f5d94e;
   --color-accent-hover: #eab308;
   --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f8fafc;
+  --color-surface-muted: #f0f2f5;
   --color-white: #ffffff;
+  --color-accent-text: #0f172a;
   --color-error: #ef4444;
   --color-text: #1e293b;
   --color-text-light: #64748b;
@@ -12,6 +16,7 @@
   --color-border-focus: #3b82f6;
 
   --border-radius: 12px;
+  --border-radius-lg: 16px;
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --skeleton-bg: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
